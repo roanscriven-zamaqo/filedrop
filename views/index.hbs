@@ -1,2 +1,17 @@
 <h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+
+<div>
+  <h2>File list</h2>
+  <table>
+    <tr>
+      <th>File Name</th>
+    </tr>
+      {{#each files}}
+      <tr>
+        <td> 
+            {{this}}
+        </td>
+      </tr>
+      {{/each}}
+  </table>
+</div>
