@@ -11,4 +11,20 @@ router.get('/', function(req, res, next) {
   }); 
 });
 
+router.post('/', function(req, res){
+
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return res.status(400).send('No files were uploaded.');
+    }
+
+    const newFile = req.files.newFile;
+    const uploadPath = process.env.PERSISTENT_STORAGE_DIR + '/' + newFile.name;
+
+    newFile.mv(uploadPath, function(err) {
+      if (err) return res.status(500).send(err);
+      return res.redirect('/');
+    });
+
+}); 
+
 module.exports = router;
