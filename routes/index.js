@@ -27,4 +27,9 @@ router.post('/', function(req, res){
 
 }); 
 
+router.get('/:filename', function(req, res, next){
+    const filepath = process.env.PERSISTENT_STORAGE_DIR + '/' + req.params.filename; 
+    return res.download(filepath); 
+}); 
+
 module.exports = router;
