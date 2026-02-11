@@ -27,3 +27,35 @@
       {{/each}}
   </table>
 </div>
+
+<div>
+  <h2>File list</h2>
+  <table>
+    <tr>
+      <th>File Name</th>
+      <th></th>
+    </tr>
+      {{#each files}}
+      <tr>
+        <td> 
+            <a href='/{{this}}' target="_blank">{{this}}</a> 
+        </td>
+        <td>
+          <button onclick="deleteFile('{{this}}')">Delete</button>
+        </td>
+      </tr>
+      {{/each}}
+  </table>
+</div>
+
+<script type="text/javascript">
+  function deleteFile(filename){
+
+    var confirmation = confirm('Do you really want to delete the file ' + filename + '?'); 
+    if (confirmation === true){
+      fetch('/' + filename, { method: 'DELETE' })
+      .then(response => location.reload())
+      .catch(error => alert('Error deleting the file! ' + error)); 
+    }
+  }
+</script>
