@@ -32,4 +32,14 @@ router.get('/:filename', function(req, res, next){
     return res.download(filepath); 
 }); 
 
+router.delete('/:filename', function(req, res){
+  const filepath = process.env.PERSISTENT_STORAGE_DIR + '/' + req.params.filename; 
+
+  fs.unlink(filepath, function (err) {
+    if (err) return res.sendStatus(500); 
+    else return res.sendStatus(200); 
+  }); 
+
+}); 
+
 module.exports = router;
